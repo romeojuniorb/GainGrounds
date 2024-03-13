@@ -1,0 +1,46 @@
+<%- layout('layouts/boilerplate') %>
+
+<h1>THE LIFTS</h1>
+
+<form action="../models/lifts" method="POST" class="validated-form" novalidate>
+
+  <div class="form-group">
+    <label for="date">Date:</label>
+    <input type="date" class="form-control" id="date" name="date" required />
+  </div>
+
+  <div class="form-group">
+    <label for="bench">Bench Press - Weight Lifted:</label>
+    <input
+      type="number"
+      class="form-control"
+      id="bench"
+      name="bench[weightLifted]"
+      step="0.01"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="squat">Squat - Weight Lifted:</label>
+    <input
+      type="number"
+      class="form-control"
+      id="squat"
+      name="squat[weightLifted]"
+      step="0.01"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="deadlift">Deadlift - Weight Lifted:</label>
+    <input
+      type="number"
+      class="form-control"
+      id="deadlift"
+      name="deadlift[weightLifted]"
+      step="0.01"
+    />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
