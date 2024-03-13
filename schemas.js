@@ -12,4 +12,4 @@ module.exports.lifts = Joi.object({
     deadlift: Joi.object({
         weightLifted: Joi.number().min(0).precision(2)
     })
-}).or('bench', 'squat', 'deadlift'); // At least one of the lifts must be provided
+}).or('bench', 'squat', 'deadlift'); 
