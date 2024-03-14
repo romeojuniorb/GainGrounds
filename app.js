@@ -1,5 +1,5 @@
 const express = require("express");
-const ExpressError = require('./utils/ExpressError');
+const ExpressError = require("./utils/ExpressError");
 const path = require("path");
 const mongoose = require("mongoose");
 const ejsMate = require("ejs-mate");
@@ -11,10 +11,11 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const app = express();
 const userRoutes = require("./routes/users");
+const liftRoutes = require('./routes/lifts');
 
 // Connect to MongoDB
 mongoose
-  .connect("mongodb://localhost:27017/usersDb", {
+  .connect("mongodb://localhost:27017/gainGrounds", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -54,6 +55,7 @@ passport.deserializeUser(User.deserializeUser());
 
 // Routes
 app.use("/", userRoutes);
+app.use('/', liftRoutes); 
 
 // Middleware for method override
 app.use(methodOverride("_method"));
@@ -67,23 +69,23 @@ app.get("/", (req, res) => {
 });
 
 // View pages
-app.get("/dashboard", (req, res) => {
-  res.render("dashboard");
-});
-
 app.get("/progress", (req, res) => {
   res.render("progress");
 });
 
-app.all('*', (req, res, next) => {
-  next(new ExpressError('Page Not Found', 404))
+app.get("/lifts", (req, res) =>{
+  res.render("lifts");
 })
+
+app.all("*", (req, res, next) => {
+  next(new ExpressError("Page Not Found", 404));
+});
 
 app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;
-  if (!err.message) err.message = 'Oh No, Something Went Wrong!'
-  res.status(statusCode).render('error', { err })
-})
+  if (!err.message) err.message = "Oh No, Something Went Wrong!";
+  res.status(statusCode).render("error", { err });
+});
 
 // Listen on port 3000
 app.listen(3000, () => {
