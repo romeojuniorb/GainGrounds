@@ -23,20 +23,20 @@
 }
 
 .button-34 {
-  background-color: black; /* Button background color */
+  background-color: black;
   color: #f3d633;
   border: 2px solid #f3d633;
-  border-radius: 0; /* Border radius for the rectangle */
-  padding: 10px 20px; /* Top and bottom padding, left and right padding */
-  font-family: Arial, sans-serif; /* Font family */
-  font-size: 16px; /* Font size */
-  cursor: pointer; /* Cursor to indicate it's clickable */
-  outline: none; /* Remove default focus outline */
+  border-radius: 0; 
+  padding: 10px 20px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
 }
 
 .button-34:hover {
-    color: white; /* Text color */
-    border: 4px solid white; /* Border color and width */
+    color: white;
+    border: 4px solid white;
 }
 
 h1 {
