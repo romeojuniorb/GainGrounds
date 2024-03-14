@@ -5,3 +5,5 @@ Welcome to GainGrounds, the ultimate platform dedicated to empowering gym enthus
 
 🚧 Current Developments
 GainGrounds is actively evolving! We are currently working on expanding our collection of view pages to enhance user experience and interface. Additionally, we are developing robust authorization features to ensure secure access and protect our users' data. Stay tuned for updates as we continue to build out these key features to bring you a more comprehensive and secure fitness tracking platform.
+
+<img width="960" alt="Screenshot 2024-03-12 231652" src="https://github.com/romeojuniorb/GainGrounds/assets/163235833/5a568e00-391d-421b-a838-d3bd668b5393">
