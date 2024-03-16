@@ -1,20 +1,33 @@
 <nav class="nav-menu mb-4">
-  <div class="nav-container">
+  <div class="nav-container d-flex justify-content-between align-items-center">
     <a href="/" class="nav-brand">GAIN GROUNDS</a>
-    <button type="button" id="menu-show-btn">
-      <i class="fas fa-bars"></i>
-    </button>
-
-    <div class="nav-overlay">
-      <div class="nav-overlay-container">
-        <button type="button" id="menu-hide-btn">
-          <i class="fas fa-close"></i>
+    <div class="navbar-nav">
+      <div class="d-flex align-items-center">
+        <% if (currentUser) { %>
+        <button type="show-btn" id="menu-show-btn" class="btn">
+          <i class="fas fa-bars" style="font-size:32px; color:white"></i>
         </button>
 
-        <ul class="nav-links">
-          <li><a href="/">HOME</a></li>
-          <li><a href="/progress">progress</a></li>
-        </ul>
+        <div class="nav-overlay">
+          <div class="nav-overlay-container">
+            <button type="button" id="menu-hide-btn" class="btn">
+              <i class="fas fa-times"></i>
+            </button>
+            <ul class="nav-links">
+              <li><a href="/">HOME</a></li>
+              <li><a href="/progress">PROGRESS</a></li>
+              <li><a href="/logout">LOG OUT</a></li>
+            </ul>
+          </div>
+        </div>
+        <% } else { %>
+        <form action="/login" method="post">
+          <button type="submit" class="button-34">Log In</button>
+        </form>
+        <form action="/register" method="post">
+          <button type="submit" class="button-34 ml-2">Sign Up</button>
+        </form>
+        <% } %>
       </div>
     </div>
   </div>
