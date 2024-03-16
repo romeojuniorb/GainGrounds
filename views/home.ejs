@@ -32,6 +32,9 @@
     <header><%- include('partials/navbar') %></header>
 
     <div class="center-container content">
+      <% if (user) { %>
+      <h1>Welcome, <%= user.username %>!</h1>
+      <% } else { %>
       <h1>Redefine Your Limits - GAIN GROUNDS Welcomes You!</h1>
       <div class="intro-text">
         <p>
@@ -48,11 +51,8 @@
           comprehensive tools, monitoring your fitness progress has never been
           easier or more motivating.
         </p>
-        <div class="nav-links mt-4">
-          <a href="/login" class="button-34">Log In</a>
-          <a href="/register" class="button-34">Sign Up Now!</a>
-        </div>
       </div>
+      <% } %>
     </div>
 
     <script
