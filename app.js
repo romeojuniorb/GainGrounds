@@ -1,3 +1,4 @@
+// app.js
 const express = require("express");
 const ExpressError = require("./utils/ExpressError");
 const path = require("path");
@@ -15,10 +16,7 @@ const liftRoutes = require('./routes/lifts');
 
 // Connect to MongoDB
 mongoose
-  .connect("mongodb://localhost:27017/gainGrounds", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect("mongodb://localhost:27017/gainGrounds")
   .then(() => console.log("Connected to DB!"))
   .catch((error) => console.log(error.message));
 
@@ -40,6 +38,7 @@ app.use(session(sessionConfig));
 app.use(flash());
 
 app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   next();
@@ -65,17 +64,38 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Root route
 app.get("/", (req, res) => {
-  res.render("home");
+  console.log(req.user ? req.user : null);
+  res.render("home", { user: req.user });
 });
 
-// View pages
-app.get("/progress", (req, res) => {
-  res.render("progress");
-});
-
-app.get("/lifts", (req, res) =>{
-  res.render("lifts");
+// Progress route
+app.get("/progress", (req,res) => {
+  console.log(req.user ? req.user : null);
+  res.render("progress", { user: req.user });
 })
+
+// Login Route
+app.get("/login", (req,res) => {
+  console.log(req.user ? req.user : null);
+  res.render("login", { user: req.user });
+})
+
+// Register Route
+app.get("/register", (req,res) => {
+  console.log(req.user ? req.user : null);
+  res.render("register", { user: req.user });
+})
+
+
+
+// Logout route
+app.get("/logout", (req, res) => {
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    req.flash("success", "You've been logged out successfully.");
+    res.redirect('/');
+  });
+});
 
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));
@@ -85,6 +105,11 @@ app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;
   if (!err.message) err.message = "Oh No, Something Went Wrong!";
   res.status(statusCode).render("error", { err });
+});
+
+app.use(function (req, res, next) {
+  res.locals.session = req.session;
+  next();
 });
 
 // Listen on port 3000
