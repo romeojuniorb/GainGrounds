@@ -1,0 +1,111 @@
+body {
+  background-color: #ebebeb;
+}
+
+.card {
+  width: 50%;
+  margin: 0 auto;
+  float: none;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.form-field {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease; 
+}
+
+.form-field:focus {
+  border-color: blue; 
+}
+
+.form-field:focus + .form-label,
+.form-field:not(:placeholder-shown) + .form-label {
+  top: -10px;
+  left: 10px;
+  background-color: white;
+  padding: 0 5px;
+  font-size: 14px;
+}
+
+.form-label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: transparent;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.login-alt {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.login-alt::before,
+.login-alt::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #ccc;
+}
+
+.login-alt::before {
+  margin-right: 10px;
+}
+
+.login-alt::after {
+  margin-left: 10px;
+}
+
+.login-alt span {
+  padding: 0 1rem;
+  background: #fff;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.login-alt::before,
+.login-alt::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #ccc;
+}
+
+.login-alt::before {
+  margin-right: 10px;
+}
+
+.login-alt::after {
+  margin-left: 10px;
+}
+
+.login-alt span {
+  padding: 0 1rem;
+  background: #fff;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.btn-success {
+  padding: 16px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  background-color: #28a745;
+  cursor: pointer;
+  transition: background-color 0.5s ease, border-color 0.5s ease,
+    box-shadow 0.5s ease;
+    width: 75%;
+    max-width: 100%;
+}
+
