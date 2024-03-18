@@ -1,4 +1,3 @@
-// app.js
 const express = require("express");
 const ExpressError = require("./utils/ExpressError");
 const path = require("path");
@@ -13,6 +12,7 @@ const flash = require("connect-flash");
 const app = express();
 const userRoutes = require("./routes/users");
 const liftRoutes = require('./routes/lifts');
+const measurementsRoutes = require('./routes/bodyMeasurements');
 
 // Connect to MongoDB
 mongoose
@@ -37,13 +37,6 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 app.use(flash());
 
-app.use((req, res, next) => {
-  res.locals.currentUser = req.user;
-  res.locals.success = req.flash("success");
-  res.locals.error = req.flash("error");
-  next();
-});
-
 // Passport configuration
 app.use(passport.initialize());
 app.use(passport.session());
@@ -52,9 +45,17 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
+});
+
 // Routes
 app.use("/", userRoutes);
 app.use('/', liftRoutes); 
+app.use('/', measurementsRoutes)
 
 // Middleware for method override
 app.use(methodOverride("_method"));
@@ -67,26 +68,6 @@ app.get("/", (req, res) => {
   console.log(req.user ? req.user : null);
   res.render("home", { user: req.user });
 });
-
-// Progress route
-app.get("/progress", (req,res) => {
-  console.log(req.user ? req.user : null);
-  res.render("progress", { user: req.user });
-})
-
-// Login Route
-app.get("/login", (req,res) => {
-  console.log(req.user ? req.user : null);
-  res.render("login", { user: req.user });
-})
-
-// Register Route
-app.get("/register", (req,res) => {
-  console.log(req.user ? req.user : null);
-  res.render("register", { user: req.user });
-})
-
-
 
 // Logout route
 app.get("/logout", (req, res) => {
@@ -107,10 +88,7 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error", { err });
 });
 
-app.use(function (req, res, next) {
-  res.locals.session = req.session;
-  next();
-});
+
 
 // Listen on port 3000
 app.listen(3000, () => {
