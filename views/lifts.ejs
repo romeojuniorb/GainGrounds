@@ -1,13 +1,75 @@
-<% layout('layouts/boilerplate')%>
+<% layout('layouts/boilerplate') %>
 
-<h1>All Lift Records</h1>
-
-
-<% lifts.forEach(function(lift) { %>
-  <div>
-    <h2><%= lift.date.toDateString() %></h2>
-    <p>Bench Press: <%= lift.bench.weightLifted %>kg</p>
-    <p>Squat: <%= lift.squat.weightLifted %>kg</p>
-    <p>Deadlift: <%= lift.deadlift.weightLifted %>kg</p>
+<section class="container">
+  <div class="card-header" style="background-color: white">
+    <h1 class="text-center mt-3 mb-3">Enter new records</h1>
   </div>
-<% }); %>
+  <form action="/lifts" method="POST" class="validated-form" novalidate>
+    <div class="card-group">
+      <!-- Bench Press Card -->
+      <div class="card">
+        <div class="card-body">
+          <div class="form-group">
+            <input
+              type="number"
+              class="form-field"
+              id="bench_weightLifted"
+              name="bench[weightLifted]"
+              placeholder=" "
+            />
+            <label class="form-label" for="bench_weightLifted"
+              >Bench Press:</label
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Squat Card -->
+      <div class="card">
+        <div class="card-body">
+          <div class="form-group">
+            <input
+              type="number"
+              class="form-field"
+              id="squat_weightLifted"
+              name="squat[weightLifted]"
+              placeholder=" "
+            />
+            <label class="form-label" for="squat_weightLifted">Squat:</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Deadlift Card -->
+      <div class="card">
+        <div class="card-body">
+          <div class="form-group">
+            <input
+              type="number"
+              class="form-field"
+              id="deadlift_weightLifted"
+              name="deadlift[weightLifted]"
+              placeholder=" "
+            />
+            <label class="form-label" for="deadlift_weightLifted"
+              >Deadlift:</label
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="date" class="form-control" id="date" name="date" required />
+    </div>
+    <div class="form-group button-container text-center">
+      <button type="submit" class="btn button-34">Submit</button>
+      <button
+        type="button"
+        class="btn btn-danger"
+        onclick="location.href='/progress'"
+      >
+        Return to Progress
+      </button>
+    </div>
+  </form>
+</section>
