@@ -9,37 +9,29 @@ const liftsSchema = new Schema(
       index: true,
     },
     bench: {
-      weightLifted: {
-        type: Number,
-
-        min: [0, "Weight must be a positive number"],
-      },
+      weightLifted: Number,
       sets: { type: Number, default: 1 },
       reps: { type: Number, default: 1 },
       notes: String,
     },
     squat: {
-      weightLifted: {
-        type: Number,
-
-        min: [0, "Weight must be a positive number"],
-      },
+      weightLifted: Number,
       sets: { type: Number, default: 1 },
       reps: { type: Number, default: 1 },
       notes: String,
     },
     deadlift: {
-      weightLifted: {
-        type: Number,
-
-        min: [0, "Weight must be a positive number"],
-      },
+      weightLifted: Number,
       sets: { type: Number, default: 1 },
       reps: { type: Number, default: 1 },
       notes: String,
     },
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    }
   },
   { timestamps: true }
 );
 
-module.exports = Lift = mongoose.model('Lift', liftsSchema);
+module.exports = Lift = mongoose.model("Lift", liftsSchema);
