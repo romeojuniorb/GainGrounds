@@ -12,6 +12,7 @@ Whether you're here to track your weightlifting milestones, monitor your weight 
 🔐 Enhanced Authorization Features:
 Your security is my top priority. That's why I'm beefing up the authorization features to ensure that your access is always secure and your personal data is protected. Rest assured, I’m on it, making sure your fitness journey is safe and sound.
 
+
 🚧 What's New & What's Next
 
 📝 Workout Plan Schema:
