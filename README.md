@@ -1,19 +1,17 @@
-🌱** Welcome to GainGrounds!
-**
+🌱**Welcome to GainGrounds!**
 Hey there! I'm the solo developer behind GainGrounds, your soon-to-be favorite fitness progress tracker. 🏋️‍♂️ This project is my baby; born out of a passion for fitness and a desire to build something that could help others like you (and me!) stay motivated and on top of our fitness goals. Here at GainGrounds, it's all about celebrating every step of your fitness journey, big or small.
 
-🚀 ** What's Cooking in the GainGrounds Lab?
-**
+🚀 **What's Cooking in the GainGrounds Lab?**
 As a one-man team, I juggle between coding, coffee, and deadlifts - and I love every bit of it. Here’s what I’m currently pouring my heart into:
 
-📊 ** Your Progress, Visualized: **
+📊 **Your Progress, Visualized:**
 Whether you're here to track your weightlifting milestones, monitor your weight loss or gain, or simply to keep a record of your personal bests, GainGrounds is here to support your journey. I’m dedicated to providing you with the tools to see your progress in real-time, celebrate your achievements, and even identify areas for improvement. All this, wrapped up in an interface that’s as easy to use as it is on the eyes. Let’s keep those gains coming! 💪📈
 
-**🔐 Enhanced Authorization Features: **
+**🔐Enhanced Authorization Features:**
 Your security is my top priority. That's why I'm beefing up the authorization features to ensure that your access is always secure and your personal data is protected. Rest assured, I’m on it, making sure your fitness journey is safe and sound.
 
 
-**🚧 What's New & What's Next **
+**🚧 What's New & What's Next**
 
 **📝 Workout Plan Schema:**
 I’m super excited to share that I’m working on a feature that'll let everyone, yes, even those who aren’t logged in, to create and edit their workout plans. My aim? To craft an inclusive tool that’s intuitive and adaptable, allowing you to personalize your fitness journey in a way that best suits your goals and lifestyle. It’s all about making GainGrounds a go-to platform for everyone passionate about health and fitness.
