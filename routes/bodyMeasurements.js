@@ -1,9 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const bodyMeasurements = require("../models/bodyMeasurement");
+const Lift = require("../models/lift");
 const { isLoggedIn } = require("../middleware");
 const catchAsync = require("../utils/catchAsync");
 
+router.get(
+  "/bodyMeasurements",
+  isLoggedIn,
+  catchAsync(async (req, res) => {
+    const measurements = await Lift.find({});
+    const lifts = await Measurements.find({});
+    res.render("bodyMeasurements", { lifts, measurements });
+  })
+);
 
 router.post(
   "/bodyMeasurements",
