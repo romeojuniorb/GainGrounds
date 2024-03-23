@@ -1,83 +1,92 @@
 <header>
   <% layout('layouts/boilerplate') %>
 </header>
-<h1 class="text-center mb-3">Your Progress:</h1>
+<u> <h1 class="text-center mb-3">Your Progress:</h1></u>
 
 <section id="container">
-    <div>
-      <div class="card text-center">
-        <div class="card-body">
-          <h5 class="card-title">Total Sessions</h5>
-          <p class="card-text"><%= lifts.length + measurements.length %></p>
-        </div>
+  <div>
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title">Total Sessions</h5>
+        <p class="card-text"><%= lifts.length + measurements.length %></p>
       </div>
     </div>
-    <div>
-      <div class="card text-center">
-        <div class="card-body">
-          <h5 class="card-title">Average Weight Recorded</h5>
-          <p class="card-text">
-            <% let totalWeight = measurements.reduce((acc, cur) => acc +
-            cur.weight, 0); let avgWeight = measurements.length > 0 ?
-            (totalWeight / measurements.length).toFixed(2) : 0; %> <%= avgWeight
-            %> lbs
-          </p>
-        </div>
+  </div>
+  <div>
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title">Average Weight Recorded</h5>
+        <p class="card-text">
+          <% let totalWeight = measurements.reduce((acc, cur) => acc +
+          cur.weight, 0); let avgWeight = measurements.length > 0 ? (totalWeight
+          / measurements.length).toFixed(2) : 0; %> <%= avgWeight %> lbs
+        </p>
       </div>
+    </div>
   </div>
 </section>
 
-<% if(lifts.length > 0) { %>
-<div class="card-body">
-  <table class="table table-striped table-bordered table-hover text-center">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Bench Press (lbs)</th>
-        <th scope="col">Squat (lbs)</th>
-        <th scope="col">Deadlift (lbs)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% lifts.forEach(function(lift, index) { %>
-      <tr>
-        <th scope="row"><%= index + 1 %></th>
-        <td><%= lift.bench.weightLifted %></td>
-        <td><%= lift.squat.weightLifted %></td>
-        <td><%= lift.deadlift.weightLifted %></td>
-      </tr>
-      <% }); %>
-    </tbody>
-  </table>
-</div>
-<% } else { %>
-<h3 class="text-center">No lift records added</h3>
-<% } %> <% if(measurements.length > 0) { %>
-<div class="card-body">
-  <table class="table table-striped table-bordered table-hover text-center">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Weight (lbs)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% measurements.forEach(function(measurement, index) { %>
-      <tr>
-        <th scope="row"><%= index + 1 %></th>
-        <td><%= measurement.weight %></td>
-      </tr>
-      <% }); %>
-    </tbody>
-  </table>
-</div>
+<u><h2 class="text-center mt-3 mb-3">Current Lifts</h2></u>
+<section id="container">
+  <% if(lifts.length > 0) { %>
+  <div class="card-body">
+    <table class="table table-striped table-bordered table-hover text-center">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Bench Press (lbs)</th>
+          <th scope="col">Squat (lbs)</th>
+          <th scope="col">Deadlift (lbs)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% lifts.forEach(function(lift, index) { %>
+        <tr>
+          <th scope="row"><%= index + 1 %></th>
+          <td><%= lift.bench ? lift.bench.weightLifted : 'N/A' %></td>
+          <td><%= lift.squat ? lift.squat.weightLifted : 'N/A' %></td>
+          <td><%= lift.deadlift ? lift.deadlift.weightLifted : 'N/A' %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+  <% } else { %>
+  <h3 class="text-center">No lift records added</h3>
+  <% } %>
+  <div class="text-center mb-3">
+    <a class="btn button-34" href="/lifts">Enter new lifts</a>
+  </div>
+</section>
 
-<% } else { %>
-<h3 class="text-center">No body measurements added</h3>
-<% } %>
-<div class="text-center mb-3">
-  <a class="btn btn-primary mb-3" href="/lifts">Enter new lifts</a>
-  <a class="btn btn-primary" href="/bodyMeasurements"
-    >Enter body measurements</a
-  >
-</div>
+<u><h2 class="text-center mt-3 mb-3">Weight Progress</h2></u>
+<section id="container">
+  <% if(measurements.length > 0) { %>
+  <div class="card-body">
+    <table class="table table-striped table-bordered table-hover text-center">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Weight (lbs)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% measurements.forEach(function(measurement, index) { %>
+        <tr>
+          <th scope="row"><%= index + 1 %></th>
+          <td><%= measurement.weight %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+
+  <% } else { %>
+  <h3 class="text-center">No body measurements added</h3>
+  <% } %>
+  <div class="text-center">
+    <a class="btn button-34" href="/bodyMeasurements"
+      >Enter body measurements</a
+    >
+  </div>
+</section>
