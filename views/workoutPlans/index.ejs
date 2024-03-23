@@ -1,0 +1,91 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="text-center mb-4">
+  <h1>Workout Plans</h1>
+</div>
+
+<section class="workout-container">
+  <% if(plans.length === 0) { %>
+  <p>No workout plans found. Create your first one!</p>
+  <% } else { %> <% plans.forEach(plan => { %>
+
+  <div class="card mb-3">
+    <div class="card-header">
+      <h3><%= plan.title %></h3>
+    </div>
+    <div class="card-body">
+      <p><strong>Description:</strong> <%= plan.description %></p>
+      <% if(plan.exercises.length > 0) { %>
+      <h4>Exercises:</h4>
+      <ul>
+        <% plan.exercises.forEach((exercise, index) => { %>
+        <li>
+          <strong>Exercise <%= index + 1 %>:</strong> <%= exercise.name %>,
+          Sets: <%= exercise.sets %>, Reps: <%= exercise.reps %> <%
+          if(exercise.notes) { %> <br /><strong>Notes:</strong> <%=
+          exercise.notes %> <% } %>
+        </li>
+        <% }); %>
+      </ul>
+      <% } else { %>
+      <p>No exercises added.</p>
+      <% } %>
+    </div>
+  </div>
+  <% }); %> <% } %>
+</section>
+
+<div class="text-center mt-3">
+  <a href="/new" class="button-34">Create a new plan</a>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get all card elements
+    const cards = document.querySelectorAll(".workout-container div.card");
+
+    // Initialize variables to store the maximum width and height
+    let maxWidth = 0;
+    let maxHeight = 0;
+
+    // Loop through each card to find the maximum width and height
+    cards.forEach((card) => {
+      const rect = card.getBoundingClientRect(); // Get the bounding rectangle of the card
+
+      // Update maxWidth and maxHeight if current card's width or height is greater
+      if (rect.width > maxWidth) {
+        maxWidth = rect.width;
+      }
+      if (rect.height > maxHeight) {
+        maxHeight = rect.height;
+      }
+    });
+
+    // Apply the maximum width and height to all cards
+    cards.forEach((card) => {
+      card.style.width = maxWidth + "px";
+      card.style.height = maxHeight + "px";
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get all card elements
+    const cards = document.querySelectorAll(".workout-container div.card");
+
+    // Initialize variable to store the maximum height
+    let maxHeight = 0;
+
+    // Loop through each card to find the maximum height
+    cards.forEach((card) => {
+      const cardHeight = card.scrollHeight; // Get the scroll height of the card
+      maxHeight = Math.max(maxHeight, cardHeight); // Update maxHeight
+    });
+
+    // Apply the maximum height to all cards
+    cards.forEach((card) => {
+      card.style.height = maxHeight + "px";
+    });
+  });
+</script>

@@ -1,0 +1,123 @@
+<% layout('layouts/boilerplate') %>
+
+<section class="container">
+  <div class="card text-center">
+    <div class="card-header">
+      <h3 class="mt-2">Create Workout Plan</h3>
+    </div>
+    <div class="card-body">
+      <form
+        action="/workoutPlans"
+        method="POST"
+        class="validated-form"
+        novalidate
+      >
+        <b>Enter a title and description</b>
+        <div class="form-group mt-3">
+          <input
+            type="text"
+            class="form-field"
+            id="title"
+            name="title"
+            placeholder=" "
+          />
+          <label class="form-label" for="title">Title</label>
+        </div>
+
+        <div class="form-group">
+          <textarea
+            type="text"
+            class="form-field"
+            id="description"
+            placeholder=" "
+            name="description"
+          ></textarea>
+
+          <label class="form-label" for="description">Description</label>
+        </div>
+
+        <b>Enter exercises</b>
+        <div id="exercises-container"></div>
+        <div class="button-container">
+          <button type="button" class="button-34 mr-2" id="addExercise">
+            Add an exercise
+          </button>
+          <button class="btn btn-success">Submit</button>
+        </div>
+      </form>
+      <div class="text-center">
+        <h6 class="card-title mt-3">
+          <i
+            >'If you fail to plan, you are planning to fail' - Benjamin
+            Franklin</i
+          >
+        </h6>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let exerciseCount = 0;
+
+    function addExercise(event) {
+      if (event) event.preventDefault();
+
+      const container = document.getElementById("exercises-container");
+      const exerciseDiv = document.createElement("div");
+      exerciseDiv.classList.add("exercise-group", "mt-3");
+      exerciseCount++;
+
+      exerciseDiv.innerHTML = `
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-field"
+            id="exercise-name-${exerciseCount}"
+            name="exercises[${exerciseCount}][name]" // The index helps to keep the array of objects organized
+            placeholder=" "
+            required
+          />
+          <label class="form-label" for="exercise-name-${exerciseCount}">Exercise Name</label>
+        </div>
+        <div class="form-group">
+          <input
+            type="number"
+            class="form-field"
+            id="exercise-sets-${exerciseCount}"
+            name="exercises[${exerciseCount}][sets]" // The index helps to keep the array of objects organized
+            placeholder=" "
+            required
+          />
+          <label class="form-label" for="exercise-sets-${exerciseCount}">Sets</label>
+        </div>
+        <div class="form-group">
+          <input
+            type="number"
+            class="form-field"
+            id="exercise-reps-${exerciseCount}"
+            name="exercises[${exerciseCount}][reps]" // The index helps to keep the array of objects organized
+            placeholder=" "
+            required
+          />
+          <label class="form-label" for="exercise-reps-${exerciseCount}">Reps</label>
+        </div>
+        <div class="form-group">
+          <textarea
+            class="form-field"
+            id="exercise-notes-${exerciseCount}"
+            placeholder=" "
+            name="exercises[${exerciseCount}][notes]" // The index helps to keep the array of objects organized
+          ></textarea>
+          <label class="form-label" for="exercise-notes-${exerciseCount}">Notes</label>
+        </div>
+      `;
+
+      container.appendChild(exerciseDiv);
+    }
+
+    document.getElementById("addExercise").addEventListener("click", addExercise);
+  });
+</script>
+
