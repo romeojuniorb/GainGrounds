@@ -1,0 +1,45 @@
+<% layout('layouts/boilerplate') %>
+<h1 class="text-center mb-3">The Workout Database</h1>
+
+<% plans.forEach(plan => { %>
+<div class="card card-extend-header mb-3" id="card-<%= plan._id %>">
+  <div
+    class="card-header card-header-hover d-flex justify-content-between card-header-toggle"
+  >
+    <h3><%= plan.workoutTitle %></h3>
+  </div>
+  <div class="card-body card-extend">
+    <p><strong>Description:</strong> <%= plan.description %></p>
+    <% if(plan.exercisesngth > 0) { %>
+    <h4>Exercises:</h4>
+    <ul>
+      <% plan.exercises.forEach((exercise, index) => { %>
+      <li>
+        <strong>Exercise <%= index + 1 %>:</strong> <%= exercise.name %>, Sets:
+        <%= exercise.sets %>, Reps: <%= exercise.reps %> <% if(exercise.notes) {
+        %> <br /><strong>Notes:</strong> <%= exercise.notes %> <% } %>
+      </li>
+      <% }); %>
+    </ul>
+    <% } else { %>
+    <p>No exercises added.</p>
+    <% } %>
+    <a
+      href="/workoutPlans/<%= plan._id %>/edit"
+      class="btn btn-primary text-center"
+      >Edit this plan</a
+    >
+  </div>
+</div>
+<% }); %>
+
+<div class="text-center mt-3">
+  <a href="/new" class="btn btn-success">Create a new plan</a>
+  <a href="/workoutPlans" class="btn btn-danger">Return</a>
+</div>
+
+<style>
+  .card-body {
+    display: none;
+  }
+</style>
