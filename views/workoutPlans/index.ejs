@@ -1,91 +1,90 @@
-<% layout('layouts/boilerplate')%>
+<% layout('layouts/boilerplate') %>
 
-<div class="text-center mb-4">
-  <h1>Workout Plans</h1>
-</div>
+<section class="container">
+  <h2 id="subtitlepage" class="text-center">
+    <b>COLLABORATIVE FITNESS DATABASE</b>
+  </h2>
 
-<section class="workout-container">
-  <% if(plans.length === 0) { %>
-  <p>No workout plans found. Create your first one!</p>
-  <% } else { %> <% plans.forEach(plan => { %>
+  <% if (workout.length === 0) { %>
+  <h6 class="text-center mt-5">
+    No workout plans in database. Add your first workout!
+  </h6>
+  <% } else { %> <% workout.forEach(plan => { %>
+  <div class="card card-extend-header mb-3" id="card-<%= plan._id %>">
+    <% if(plan.image) { %>
+    <img
+      src="<%= plan.image %>"
+      class="card-img-top"
+      alt="Workout Plan Image"
+    />
+    <% } %>
+    <div class="card-body card-extend">
+      <div
+        class="card-header card-header-hover d-flex justify-content-between mb-3"
+      >
+        <h3><b><%= plan.workoutTitle %></b></h3>
+        <% if(plan.userId) { %>
+        <div class="made-by text-muted">
+          Made by: <%= plan.userId.username %>
+        </div>
+        <% } else { %>
+        <div class="made-by text-muted">User no longer available</div>
+        <% } %>
+      </div>
 
-  <div class="card mb-3">
-    <div class="card-header">
-      <h3><%= plan.title %></h3>
-    </div>
-    <div class="card-body">
-      <p><strong>Description:</strong> <%= plan.description %></p>
-      <% if(plan.exercises.length > 0) { %>
-      <h4>Exercises:</h4>
-      <ul>
-        <% plan.exercises.forEach((exercise, index) => { %>
-        <li>
-          <strong>Exercise <%= index + 1 %>:</strong> <%= exercise.name %>,
-          Sets: <%= exercise.sets %>, Reps: <%= exercise.reps %> <%
-          if(exercise.notes) { %> <br /><strong>Notes:</strong> <%=
-          exercise.notes %> <% } %>
-        </li>
-        <% }); %>
-      </ul>
-      <% } else { %>
-      <p>No exercises added.</p>
-      <% } %>
+      <div class="card-content">
+        <p><strong>Description:</strong> <%= plan.description %></p>
+        <% if(plan.exercises.length > 0) { %>
+        <h6><b>Exercises:</b></h6>
+        <ul>
+          <% plan.exercises.forEach((exercise, index) => { %>
+          <li>
+            <strong>Exercise <%= index + 1 %>:</strong> <%= exercise.name %>,
+            Sets: <%= exercise.sets %>, Reps: <%= exercise.reps %> <%
+            if(exercise.notes) { %> <br /><strong>Notes:</strong> <%=
+            exercise.notes %> <% } %>
+          </li>
+          <% }); %>
+        </ul>
+        <% } else { %>
+        <p>No exercises added.</p>
+        <% } %> <% if (plan.preferences && plan.preferences.length > 0) { %>
+        <h6><b>Tags</b>:</h6>
+        <ul>
+          <% plan.preferences.forEach(preference => { %>
+          <li>
+            <strong><%= preference.key %>:</strong> <%= preference.value %>
+          </li>
+          <% }); %>
+        </ul>
+        <% } %>
+
+        <div>
+          <% if (plan.bodyParts && plan.bodyParts.length > 0) { %>
+            <h6><b>Body Parts Targeted:</b></h6>
+            <ul>
+              <% plan.bodyParts.forEach(group => { %> <!-- Iterate over outer array -->
+                <% if(Array.isArray(group)) { %> <!-- Ensure group is an array -->
+                  <% group.forEach(bodyPart => { %> <!-- Iterate over inner array -->
+                    <li><%= bodyPart.name %></li> <!-- Display body part -->
+                  <% }); %> <!-- End inner forEach -->
+                <% } else { %> <!-- If group is not an array -->
+                  <li><%= group.name %></li> <!-- Display single body part -->
+                <% } %> <!-- End if -->
+              <% }); %> <!-- End outer forEach -->
+            </ul>
+          <% } %>
+          
+        </div>
+      </div>
     </div>
   </div>
   <% }); %> <% } %>
+  <div class="button-container text-center">
+    <div class="text-center mt-3 mb-3">
+      <button onclick="location.href='/myWorkouts';" class="button-31">
+        My Workouts
+      </button>
+    </div>
+  </div>
 </section>
-
-<div class="text-center mt-3">
-  <a href="/new" class="button-34">Create a new plan</a>
-</div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Get all card elements
-    const cards = document.querySelectorAll(".workout-container div.card");
-
-    // Initialize variables to store the maximum width and height
-    let maxWidth = 0;
-    let maxHeight = 0;
-
-    // Loop through each card to find the maximum width and height
-    cards.forEach((card) => {
-      const rect = card.getBoundingClientRect(); // Get the bounding rectangle of the card
-
-      // Update maxWidth and maxHeight if current card's width or height is greater
-      if (rect.width > maxWidth) {
-        maxWidth = rect.width;
-      }
-      if (rect.height > maxHeight) {
-        maxHeight = rect.height;
-      }
-    });
-
-    // Apply the maximum width and height to all cards
-    cards.forEach((card) => {
-      card.style.width = maxWidth + "px";
-      card.style.height = maxHeight + "px";
-    });
-  });
-</script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Get all card elements
-    const cards = document.querySelectorAll(".workout-container div.card");
-
-    // Initialize variable to store the maximum height
-    let maxHeight = 0;
-
-    // Loop through each card to find the maximum height
-    cards.forEach((card) => {
-      const cardHeight = card.scrollHeight; // Get the scroll height of the card
-      maxHeight = Math.max(maxHeight, cardHeight); // Update maxHeight
-    });
-
-    // Apply the maximum height to all cards
-    cards.forEach((card) => {
-      card.style.height = maxHeight + "px";
-    });
-  });
-</script>
