@@ -1,19 +1,34 @@
 const mongoose = require("mongoose");
 
-const workoutPlanSchema = new mongoose.Schema({
+const preferenceSchema = new mongoose.Schema({
+  key: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  value: {
+    type: mongoose.Schema.Types.Mixed,
+    required: true,
+  },
+}, {_id: false}); 
+
+const bodyPartSchema = new mongoose.Schema({
+  name: String,
+});
+
+const workoutSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "User",
   },
-  title: {
+  workoutTitle: {
     type: String,
     required: true,
     trim: true,
   },
   description: {
     type: String,
-    required: false,
     trim: true,
   },
   exercises: [
@@ -32,13 +47,14 @@ const workoutPlanSchema = new mongoose.Schema({
       },
       notes: {
         type: String,
-        required: false,
       },
     },
   ],
   notes: {
     type: String,
-    required: false,
+  },
+  image: {
+    type: String,
   },
   created_at: {
     type: Date,
@@ -48,6 +64,14 @@ const workoutPlanSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  preferences: [preferenceSchema],
+  bodyParts: [bodyPartSchema], 
 });
 
-module.exports = mongoose.model("WorkoutPlan", workoutPlanSchema);
+const Workout = mongoose.model('Workout', workoutSchema);
+
+module.exports = { Workout, preferenceSchema, bodyPartSchema };
